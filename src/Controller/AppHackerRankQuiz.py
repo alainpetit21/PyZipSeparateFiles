@@ -14,16 +14,22 @@ class AppHackerRankQuiz:
 
     def main(self, param1=None):
         txtfiles = []
+        nameOnly = []
+
 
         for file in glob.glob(self.str_path_extension):
             txtfiles.append(file)
+            nameOnly.append(file.split(os.sep)[-1])
 
         print(txtfiles)
         print(txtfiles[0][:-3])
 
-        for file in txtfiles:
+        for i in range(len(txtfiles)):
+            file = txtfiles[i]
+            name = nameOnly[i]
+
             with ZipFile(file[:-3] + "zip", mode='w', compression=ZIP_DEFLATED, compresslevel=9) as obj_zip:
-                print("Zipping ..." + file + " ... as ... " + file[:-3] + ".zip")
-                obj_zip.write(file)
+                print("Zipping ..." + file + " ... as ... " + file[:-3] + "zip")
+                obj_zip.write(file, name)
 
 
